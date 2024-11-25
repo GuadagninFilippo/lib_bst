@@ -1,17 +1,20 @@
 #include"Node.h"
 using namespace std;
 
-Node::Node(int key): data(key), weight(0), lchild(nullptr), rchild(nullptr){}
+Node::Node(int key): data(key), weight(1), lchild(nullptr), rchild(nullptr){}
 
 Node* Node::insertR(int k) {
-    if (k < data) {
+    if(k==data){
+        weight++;
+        return this;
+    } else if (k < data) {
         if (lchild == nullptr){
             lchild = new Node(k);
         }else{
             lchild->insertR(k);
         }
     
-    }else if (k > data) {
+    }else(k > data) {
         if (rchild == nullptr){
             rchild = new Node(k);
         }else{
