@@ -16,6 +16,12 @@ public:
 
     Node* insertR(int k);
 
+    Node* insertI(int k);
+
+    bool searchI(int k);
+    
+    bool searchR(int k);
+
     void inOrder();
 };
 
