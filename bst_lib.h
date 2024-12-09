@@ -22,7 +22,15 @@ public:
     
     bool searchR(int k);
 
+    void preOrder();
+
     void inOrder();
+
+    void postOrder();
+
+    Node* deleteNode(int k); 
+
+    bool isBst();
 };
 
 #endif
