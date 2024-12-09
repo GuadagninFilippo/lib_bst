@@ -1,31 +1,36 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-#ifndef NODE_H
-#define NODE_H
+#ifndef LIB_BST_H
+#define LIB_BST_H
 
-class Node{
+class Node {
 private:
-    int data;
-    int weight;
-    Node* lchild;
-    Node* rchild;
+    int data;            
+    int weight;          
+    Node* lchild;        
+    Node* rchild;        
 
 public:
     Node(int key);
 
     Node* insertR(int k);
 
-    Node* insertI(int k);
+    Node* insertI(int k); 
 
-    bool searchI(int k);
-    
     bool searchR(int k);
 
-    void inOrder();
+    bool searchI(int k);
+
+    void inOrder(); 
+
+    friend ostream& operator<<(ostream& os, const Node& n);
+
+    friend istream& operator>>(istream& is, Node& n);  
 };
 
-#endif
+#endif 
+
 
 /*
 struct node{

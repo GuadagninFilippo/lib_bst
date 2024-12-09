@@ -50,6 +50,7 @@ Node* Node::insertI(int k) {
             }
         }
     }
+    return this;
 }
 
 //search ricorsivo
@@ -106,4 +107,18 @@ void Node::inOrder() {
         rchild->inOrder(); 
         }
         
+}
+
+ostream& operator<<(ostream& os, const Node& n) {
+    os << "data: " << n.data << ", weight: " << n.weight;
+    return os;
+}
+
+istream& operator>>(istream& is, Node& n) {
+    cout << "Inserisci il valore del nodo: ";
+    is >> n.data;
+    n.weight = 1;
+    n.lchild = nullptr;
+    n.rchild = nullptr;
+    return is;
 }
