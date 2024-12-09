@@ -138,40 +138,39 @@ void Node::postOrder() {
 }
 
 Node* Node::deleteNode(int k) {
-    if (k < data) {
+    if (k < data){
         if (lchild != nullptr) {
             lchild = lchild->deleteNode(k);
         }
-    } else if (k > data) {
+    } else if (k >data){
         if (rchild != nullptr) {
             rchild = rchild->deleteNode(k);
         }
     } else {
-        if (lchild==nullptr && rchild==nullptr) {
-            // nodo senza figli
+        if (this->rchild==nullptr && this->lchild==nullptr) {
             delete this;
             return nullptr;
 
-        } else if (lchild == nullptr) {
-            // un solo figglio a destra
-            Node* temporaneo = rchild;
+        } else if(this->rchild == nullptr) {
+            Node* t{lchild};
             delete this;
-            return temporaneo;
+            return t;
 
-        } else if (rchild == nullptr) {
-            // un solo figlio a sinistra
-            Node* temporaneo = lchild;
+        } else if(this->lchild == nullptr) {
+            Node* t{rchild};
             delete this;
-            return temporaneo;
+            return t;
 
         } else {
-            // nodo con due figli
-            Node* minNode = rchild;
-            while (minNode->lchild != nullptr) {
-                minNode = minNode->lchild;
+            Node* ptr{rchild};
+            while (ptr->lchild != NULL) {
+                if(ptr==nullptr){
+                    break;
+                }
+                ptr=ptr->lchild;
             }
-            data = minNode->data;  
-            rchild = rchild->deleteNode(minNode->data); 
+            data = ptr->data;  
+            rchild = rchild->deleteNode(ptr->data); 
         }
     }
     return this;
