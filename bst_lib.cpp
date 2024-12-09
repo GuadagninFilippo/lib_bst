@@ -28,28 +28,29 @@ Node* Node::insertR(int k) {
 Node* Node::insertI(int k) {
     Node* Current = this;
 
-    while (true) {
+    while (Current!=nullptr) {
         if (k == Current->data) {
             Current->weight++; 
-            break;
-        
+            return this;
+
         } else if (k < Current->data) {
             if (Current->lchild == nullptr) {
                 Current->lchild = new Node(k); 
-                break;
+                return this;
             } else {
                 Current=Current->lchild;
             }
         } else { 
             if (Current->rchild == nullptr) {
                 Current->rchild = new Node(k); 
-                break;
+                return this;
 
             } else {
                 Current=Current->rchild;
             }
         }
     }
+    return this;
 }
 
 //search ricorsivo
@@ -94,6 +95,20 @@ bool Node::searchI(int k) {
     return false; 
 }
 
+void Node::preOrder() {
+
+    cout << data << " ";
+
+    if (lchild != nullptr){
+        lchild->preOrder();
+        }                      
+    
+    if (rchild != nullptr){ 
+        rchild->preOrder(); 
+        }
+        
+}
+
 void Node::inOrder() {
 
     if (lchild != nullptr){
@@ -107,3 +122,82 @@ void Node::inOrder() {
         }
         
 }
+
+void Node::postOrder() {
+
+    if (lchild != nullptr){
+        lchild->postOrder();
+        }                    
+    
+    if (rchild != nullptr){ 
+        rchild->postOrder(); 
+        }
+
+    cout << data << " ";  
+        
+}
+
+Node* Node::deleteNode(int k) {
+    if (k < data) {
+        if (lchild != nullptr) {
+            lchild = lchild->deleteNode(k);
+        }
+    } else if (k > data) {
+        if (rchild != nullptr) {
+            rchild = rchild->deleteNode(k);
+        }
+    } else {
+        if (lchild==nullptr && rchild==nullptr) {
+            // nodo senza figli
+            delete this;
+            return nullptr;
+
+        } else if (lchild == nullptr) {
+            // un solo figglio a destra
+            Node* temporaneo = rchild;
+            delete this;
+            return temporaneo;
+
+        } else if (rchild == nullptr) {
+            // un solo figlio a sinistra
+            Node* temporaneo = lchild;
+            delete this;
+            return temporaneo;
+
+        } else {
+            // nodo con due figli
+            Node* minNode = rchild;
+            while (minNode->lchild != nullptr) {
+                minNode = minNode->lchild;
+            }
+            data = minNode->data;  
+            rchild = rchild->deleteNode(minNode->data); 
+        }
+    }
+    return this;
+}
+
+
+bool Node::isBst() {
+  
+    if (lchild != nullptr) {
+        if (lchild->data >= data) {
+            return false;
+        }
+        if (!lchild->isBst()) {
+            return false;
+        }
+    }
+
+    if (rchild != nullptr) {
+        if (rchild->data <= data) {
+            return false;
+        }
+        if (!rchild->isBst()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
